@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Signup Page</title>
+</head>
+<body>
+    <h2>Sign Up for New Opportunities!</h2>
+    
+    <p th:if="${#strings.equals(param.error, 'userExists')}" style="color: red; font-weight: bold;">
+        User already exists! Please choose a different username.
+    </p>
+    <p th:if="${#strings.equals(param.error, 'passwordsNotMatch')}" style="color: red; font-weight: bold;">
+        Passwords do not match! Please try again.
+    </p>
+    <p th:if="${#strings.equals(param.error, 'passwordsNotSecure')}" style="color: red; font-weight: bold;">
+        Passwords must be longers than 7 characters! Please try again.
+    </p>
+
+    <form th:action="@{/checkingSignup}" method="post">
+        <label>Enter username:</label>
+        <input type="text" name="username" required><br>
+        <label>New password:</label>
+        <input type="password" name="newPassword" required><br>
+        <label>Confirm password:</label>
+        <input type="password" name="confirmPassword" required><br>
+        <button type="submit">Sign Up</button>
+    </form>
+    
+    <hr>
+    
+    <form th:action="@{/login}" method="get">
+        Do you have an account? <button type="submit">Login</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Notes Page</title>
+</head>
+<body>
+    <h2>All your saved notes will be displayed here.</h2>
+    <hr>
+
+    <p th:if="${notes == null || notes.isEmpty()}" th:text="${message}"></p>
+
+    <ul>
+        <li th:each="note : ${notes}">
+            <span th:text="${note.content}">Note Content</span>
+        </li>
+    </ul>
+
+    <hr>
+    <h3>Want to check your notes? </h3>
+    <form th:action="@{/home/edit}" method="get">
+        <button type="submit">Of course</button>
+    </form>
+
+    <hr>
+
+    <h3>Logout</h3>
+    <form th:action="@{/logout}" method="post">
+        <button type="submit">Logout</button>
+    </form>
+
+</body>
+</html>

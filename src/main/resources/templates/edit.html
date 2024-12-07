@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Notes</title>
+</head>
+<body>
+    <h2>Edit Your Notes</h2>
+
+    <!-- Loop through all the notes -->
+    <div th:each="note : ${notes}">
+        <p>ID: <span th:text="${note.id}"></span></p>
+
+        <!-- Edit Form -->
+        <form th:action="@{/home/handleEdit}" method="post">
+            <input type="hidden" name="id" th:value="${note.id}" />
+            <input type="text" name="note" th:value="${note.content}" style="width: 100%; height: 40px;" required />
+            <button type="submit">Save</button>
+        </form>
+        
+
+        <!-- Delete Button -->
+        <form th:action="@{/home/delete}" method="post" style="display:inline;">
+            <input type="hidden" name="id" th:value="${note.id}" />
+            <button type="submit" style="background-color: red; color: white;">Delete</button>
+        </form>
+        
+
+        <hr> <!-- Separator between notes -->
+    </div>
+
+    <!-- Form to Add New Note -->
+    <form th:action="@{/home/write}" method="get">
+        <button type="submit">Write new note</button>
+    </form>
+
+    <!-- Button to go back to the home page -->
+    <hr>
+    <form th:action="@{/home}">
+        <button type="submit">Back to home page</button>
+    </form>
+</body>
+</html>
